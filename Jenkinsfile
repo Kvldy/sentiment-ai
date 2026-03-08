@@ -47,7 +47,7 @@ true).trim()
                 sh '''
                     docker run --rm \
                         -e CI=true \
-                        ''' + "${IMAGE_NAME}:${IMAGE_TAG}" + ''' \
+                        ${IMAGE_NAME}:${IMAGE_TAG} \
                         pytest -v \
                             --cov=src \
                             --cov-report=term-missing \
