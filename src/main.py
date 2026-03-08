@@ -13,3 +13,6 @@ async def health():
 async def predict(request: PredictionRequest):
     result = model.predict(request.text)
     return PredictionResponse(**result)
+
+
+#test
