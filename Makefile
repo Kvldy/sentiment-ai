@@ -22,3 +22,5 @@ build: ## Construire l'image Docker
 clean: ## Nettoyer
 	docker compose down -v
 	docker rmi $(IMAGE):$(TAG) 2>/dev/null || true
+
+	
