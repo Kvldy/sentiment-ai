@@ -171,6 +171,30 @@ true).trim()
             }
         }
 
+        stage('Deploy Staging') {
+            when {
+                branch 'main'
+            }
+            steps {
+                echo "Deploiement de ${REGISTRY}/${IMAGE_NAME}:${IMAGE_TAG} en staging..."
+
+                // Simulation : en vrai, ce serait un appel kubectl, docker stack deploy, etc.
+                sh '''
+                # Arreter l'ancien staging si existant
+                docker compose -f docker-compose.yml \
+                    -p staging down 2>/dev/null || true
+
+                # Lancer la nouvelle version
+                IMAGE_TAG=''' + "${IMAGE_TAG}" + '''
+                docker compose -f docker-compose.yml \
+                    -p staging up -d
+                '''
+
+                echo "Staging disponible sur http://localhost:8001"
+            }
+        }
+
+
 
     }
 
